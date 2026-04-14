@@ -366,3 +366,15 @@ h1 {
 
 .modal-panel { display: block; }
 .modal-panel.hidden { display: none; }
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-username {
+    font-family: "Cinzel", serif;
+    font-size: 0.8rem;
+    color: #c8d8ff;
+    letter-spacing: 0.05em;
+}
