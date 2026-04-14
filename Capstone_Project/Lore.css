@@ -18,7 +18,6 @@ body {
     overflow-x: hidden;
 }
 
-/* ── NAVBAR ───────────────────────────────── */
 header {
     position: sticky;
     top: 0;
@@ -51,7 +50,6 @@ nav {
     padding-right: 16px;
 }
 
-/* ── NAV BUTTONS ──────────────────────────── */
 .nav-btn {
     font-family: "Cinzel", serif;
     font-size: 13px;
@@ -82,7 +80,6 @@ nav {
     background: rgba(60, 100, 200, 0.8);
 }
 
-/* ── NAV ITEMS ────────────────────────────── */
 .navbar {
     color: #aab;
     width: 110px;
@@ -111,7 +108,6 @@ nav {
     border-bottom: 2px solid #4060c0;
 }
 
-/* ── BODY CONTENT ─────────────────────────── */
 .bod {
     font-size: 23px;
     margin-top: 0px;
@@ -141,7 +137,6 @@ h1 {
     border-left: 3px solid rgb(100, 90, 120);
 }
 
-/* ── SECTION (image + text row) ───────────── */
 .section {
     display: flex;
     align-items: center;
@@ -185,7 +180,6 @@ h1 {
     font-weight: 600;
 }
 
-/* ── MODAL OVERLAY ────────────────────────── */
 :root {
     --border:  #1e2e50;
     --border2: #2a3d6a;
@@ -372,158 +366,3 @@ h1 {
 
 .modal-panel { display: block; }
 .modal-panel.hidden { display: none; }
-
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
-   ═══════════════════════════════════════════ */
-
-/* ── Tablet (≤ 900px) ──────────────────────── */
-@media (max-width: 900px) {
-
-    /* Nav buttons hide behind a tighter layout */
-    .nav-right {
-        padding-right: 10px;
-        gap: 8px;
-    }
-
-    .nav-btn {
-        font-size: 11px;
-        padding: 6px 12px;
-    }
-
-    /* Shrink nav items */
-    .navbar {
-        width: 80px;
-        height: 40px;
-        font-size: 12px;
-        letter-spacing: 0.04em;
-    }
-
-    h1 {
-        font-size: 1.4rem;
-        padding: 16px 16px 4px;
-    }
-
-    .small_heading {
-        font-size: 1.1rem;
-        margin-left: 20px;
-    }
-
-    /* Section: shrink image so text still fits beside it */
-    .section {
-        margin: 16px 20px 28px;
-        gap: 20px;
-    }
-
-    .image {
-        width: 260px;
-        height: 200px;
-    }
-
-    .text {
-        font-size: 1.05rem;
-    }
-}
-
-/* ── Mobile (≤ 640px) ──────────────────────── */
-@media (max-width: 640px) {
-
-    /* Nav: 4 items × 25vw = 100vw, buttons wrap below */
-    .navbar {
-        width: 25vw;
-        height: 38px;
-        font-size: 10px;
-        letter-spacing: 0.02em;
-    }
-
-    .nav-right {
-        width: 100%;
-        justify-content: center;
-        padding: 6px 0;
-        border-top: 1px solid #1e2a40;
-        gap: 10px;
-    }
-
-    body {
-        font-size: 17px;
-    }
-
-    h1 {
-        font-size: 1.2rem;
-        padding: 14px 12px 4px;
-    }
-
-    .bod {
-        font-size: 17px;
-    }
-
-    .small_heading {
-        font-size: 1rem;
-        margin-left: 12px;
-        margin-top: 16px;
-    }
-
-    /* Stack image ABOVE text on mobile */
-    .section,
-    .section.reverse {
-        flex-direction: column;       /* always column on mobile */
-        align-items: flex-start;
-        margin: 12px 10px 20px;
-        padding: 16px;
-        gap: 14px;
-    }
-
-    /* Disable the scale hover on touch devices (avoids layout jumps) */
-    .section:hover {
-        transform: none;
-    }
-
-    /* Image fills full width */
-    .image {
-        width: 100%;
-        height: auto;
-        max-height: 240px;
-        object-fit: cover;
-        flex-shrink: unset;
-        /* Override any inline width/height set on specific images */
-        min-width: unset !important;
-    }
-
-    .text {
-        font-size: 1rem;
-        width: 100%;
-    }
-
-    /* Modal */
-    .modal {
-        max-width: 94vw;
-        padding: 28px 18px 24px;
-    }
-}
-
-/* ── Small phones (≤ 400px) ────────────────── */
-@media (max-width: 400px) {
-
-    .navbar {
-        font-size: 8.5px;
-        height: 36px;
-    }
-
-    h1 {
-        font-size: 1rem;
-    }
-
-    .small_heading {
-        font-size: 0.9rem;
-    }
-
-    .section {
-        margin: 10px 8px 16px;
-        padding: 12px;
-    }
-
-    .text {
-        font-size: 0.95rem;
-    }
-}
