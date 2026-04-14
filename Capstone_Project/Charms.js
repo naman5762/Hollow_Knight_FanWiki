@@ -89,8 +89,7 @@
       }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-  // Stagger grid children
+children
   document.querySelectorAll('.charms-grid').forEach(grid => {
     grid.querySelectorAll('.charm-card').forEach((card, i) => {
       card.dataset.delay = i * 90;
