@@ -120,8 +120,6 @@ document.getElementById('btn-register').addEventListener('click', () => {
     if (users[username.toLowerCase()]) {
         errEl.textContent = 'That username is already taken.'; return;
     }
-
-    /* Save user */
     users[username.toLowerCase()] = { username, email, password };
     saveUsers(users);
 
