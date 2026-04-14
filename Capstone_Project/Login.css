@@ -75,7 +75,6 @@ nav {
     padding-right: 20px;
 }
 
-/* Guest state */
 .nav-btn-login {
     background: transparent;
     border: 1px solid var(--border2);
