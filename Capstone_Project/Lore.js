@@ -1,6 +1,3 @@
-// hk-particles.js — Hollow Knight ambient particle system
-// Usage: <canvas id="hk-canvas"></canvas> + <script src="hk-particles.js"></script>
-
 (function () {
   const canvas = document.getElementById('hk-canvas');
   if (!canvas) return;
@@ -8,7 +5,7 @@
 
   const CONFIG = {
     count: 80,
-    bgDraw: false, // set true only if you want the canvas to paint its own bg
+    bgDraw: false,
     types: [
       { color: [180,210,255], glow: [120,160,255], sizeRange:[2,5],   speedRange:[0.3,0.9], wobble:0.6 },
       { color: [140,160,220], glow: [80,110,200],  sizeRange:[1,2.5], speedRange:[0.1,0.4], wobble:0.3 },
@@ -21,11 +18,13 @@
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
   }
+
   resize();
   window.addEventListener('resize', resize);
 
   class Particle {
     constructor() { this.reset(true); }
+
     reset(init = false) {
       const t = CONFIG.types[Math.floor(Math.random() * CONFIG.types.length)];
       this.t = t;
@@ -46,44 +45,66 @@
       this.fadeIn  = true;
       this.fadeOut = false;
     }
+
     update(frame) {
       this.y -= this.speed;
       this.x += this.wobbleAmp * Math.sin(frame * this.wobbleFreq + this.wobblePhase) + this.drift;
       this.pulse += this.pulseSpeed;
       this.life++;
+
       if (this.fadeIn) {
         this.alpha = Math.min(this.targetAlpha, this.alpha + 0.012);
         if (this.alpha >= this.targetAlpha) this.fadeIn = false;
       }
+
       if (this.life > this.maxLife * 0.75) this.fadeOut = true;
       if (this.fadeOut) this.alpha -= 0.008;
-      if (this.alpha <= 0 || this.y < -20 || this.x < -40 || this.x > canvas.width + 40) this.reset();
+
+      if (this.alpha <= 0 || this.y < -20 || this.x < -40 || this.x > canvas.width + 40) {
+        this.reset();
+      }
     }
+
     draw() {
       const r = this.size * (1 + 0.12 * Math.sin(this.pulse));
       const [cr,cg,cb] = this.t.color;
       const [gr,gg,gb] = this.t.glow;
+
       ctx.save();
       ctx.globalAlpha = this.alpha;
+
       const g = ctx.createRadialGradient(this.x,this.y,0, this.x,this.y, r*3.5);
       g.addColorStop(0,   `rgba(${cr},${cg},${cb},1)`);
       g.addColorStop(0.35,`rgba(${cr},${cg},${cb},0.6)`);
       g.addColorStop(0.7, `rgba(${gr},${gg},${gb},0.2)`);
       g.addColorStop(1,   `rgba(${gr},${gg},${gb},0)`);
-      ctx.beginPath(); ctx.arc(this.x,this.y, r*3.5, 0, Math.PI*2);
-      ctx.fillStyle = g; ctx.fill();
-      ctx.beginPath(); ctx.arc(this.x,this.y, r*0.5, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(240,245,255,0.85)`; ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(this.x,this.y, r*3.5, 0, Math.PI*2);
+      ctx.fillStyle = g;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(this.x,this.y, r*0.5, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(240,245,255,0.85)`;
+      ctx.fill();
+
       ctx.restore();
     }
   }
 
   const particles = Array.from({ length: CONFIG.count }, () => new Particle());
   let frame = 0;
+
   (function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     frame++;
-    for (const p of particles) { p.update(frame); p.draw(); }
+
+    for (const p of particles) {
+      p.update(frame);
+      p.draw();
+    }
+
     requestAnimationFrame(loop);
   })();
 })();
